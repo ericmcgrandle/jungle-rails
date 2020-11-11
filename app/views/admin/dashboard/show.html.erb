@@ -1,2 +1,23 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<h4>There are <%= @categories %> unique categories:</h4>
+<% @categories_name.map { %>
+  <% |category| %>
+  <%= link_to category do %>
+    <h6><%= category.name %></h6>
+  <% end %>
+<% } %>
+
+<br>
+<br>
+<br>
+
+<%# List all products and their respective quantities %>
+<h4>All Products:</h4>
+<% @products.map { %>
+  <% |product| %>
+  <%= link_to product do %>
+    <h6><%= product.name %> x <%= product.quantity %></h6>
+  <% end %>
+<% } %>
+
+
+
