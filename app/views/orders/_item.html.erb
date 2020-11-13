@@ -1,3 +1,9 @@
+<% if active_sale? %>
+  <%= price = new_price(product.price) %>
+<% else %>
+  <%= price = product.price %>
+<% end %>
+
 <tr>
   <td>
     <%= image_tag product.image.tiny %>
@@ -8,12 +14,12 @@
     <p><%= product.description %></p>
   </td>
   <td>
-    <%= humanized_money_with_symbol product.price %>
+    <%= humanized_money_with_symbol price %>
   </td>
   <td>
     <%= quantity %>
   </td>
   <td>
-    <%= humanized_money_with_symbol product.price * quantity %>
+    <%= humanized_money_with_symbol (price * quantity) %>
   </td>
 </tr>

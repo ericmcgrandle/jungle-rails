@@ -5,9 +5,9 @@
   </header>
 
   <% if active_sale? %>
-    <% price = humanized_money_with_symbol new_price(cart_subtotal_cents) / 100.0 %>
+    <% price = humanized_money_with_symbol new_price((cart_subtotal_cents / 100.00)) %>
   <% else %>
-    <% price = humanized_money_with_symbol cart_subtotal_cents / 100.0 %>
+    <% price = humanized_money_with_symbol cart_subtotal_cents / 100.00 %>
   <% end %>
 
 
