@@ -14,8 +14,8 @@
 
     <% if active_sale? %>
       <p class="alert alert-info">
-        There is an active <%= "Back to school" %> sale!
-        <strong>Everything is <%= 15 %>% off!</strong>
+        There is an active <%= active_sale?[0].name %> sale!
+        <strong>Everything is <%= active_sale?[0].percent_off %>% off!</strong>
       </p>
     <% end %>  
 
