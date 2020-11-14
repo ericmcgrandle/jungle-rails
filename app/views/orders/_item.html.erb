@@ -1,7 +1,7 @@
 <% if active_sale? %>
-  <%= price = new_price(product.price) %>
+  <% price = new_price(product.price) %>
 <% else %>
-  <%= price = product.price %>
+  <% price = product.price %>
 <% end %>
 
 <tr>

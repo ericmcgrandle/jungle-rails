@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
       create_user = User.create(first_name: "First", last_name: "First", email: email, password: "abc123", password_confirmation: "abc123")
 
       # user params
-      params_email = 'teSt@eXaMple.com'
+      params_email = 'test@example.com'
       params_password = 'abc123'
 
       # mock login
