@@ -42,29 +42,27 @@ class OrdersController < ApplicationController
   end
 
   def perform_stripe_charge
-    price = price(cart_subtotal_cents).floor
-    puts cart_subtotal_cents
-    puts price
     Stripe::Charge.create(
       source:      params[:stripeToken],
-      amount:      price,
+      amount:      cart_subtotal_cents.round,
       description: "Khurram Virani's Jungle Order",
       currency:    'cad'
     )
   end
 
   def create_order(stripe_charge)
-    price = price(cart_subtotal_cents)
     order = Order.new(
       email: params[:stripeEmail],
-      total_cents: price,
+      total_cents: cart_subtotal_cents.round,
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )
+
+    sale = Sale.active
 
     enhanced_cart.each do |entry|
       product = entry[:product]
       quantity = entry[:quantity]
-      price = price(product.price)
+      price = sale ? (product.price / (sale[0].percent_off * 0.1)) : product.price
       order.line_items.new(
         product: product,
         quantity: quantity,
