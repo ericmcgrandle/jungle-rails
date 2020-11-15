@@ -24,10 +24,11 @@ RSpec.feature "Visitor navigates to home page", type: :feature, js: true do
     
     find_link('Details', match: :first).click
 
+    puts page.html
 
     # DEBUG
-    sleep 1
-    save_screenshot
+    # sleep 1
+    # save_screenshot
     
     
     # VERIFY
