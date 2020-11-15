@@ -23,7 +23,7 @@
     <% end %>
   </footer>
 
-  <% if active_sale? %>
+  <% if current_sale? %>
     <aside class="sale_price">
       <b>Sale Price: </b><%= humanized_money_with_symbol new_price(product.price) %>
     </aside>

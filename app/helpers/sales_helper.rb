@@ -1,5 +1,9 @@
 module SalesHelper
 
+  def current_sale?
+    Sale.active.any?
+  end
+
   def active_sale?
     Sale.active.all
   end

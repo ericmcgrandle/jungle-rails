@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )
 
-    sale = Sale.active
+    sale = Sale.active.any?
 
     enhanced_cart.each do |entry|
       product = entry[:product]
