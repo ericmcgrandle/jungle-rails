@@ -5,10 +5,9 @@ RSpec.feature "Visitor navigates to home page", type: :feature, js: true do
   # SETUP
   before :each do
     @category = Category.create! name: 'Apparel'
-
-    10.times do |n|
+    3.times do |n|
       @category.products.create!(
-        name:  Faker::Hipster.sentence(3),
+        name: "Click Me",
         description: Faker::Hipster.paragraph(4),
         image: open_asset('apparel1.jpg'),
         quantity: 10,
@@ -21,11 +20,19 @@ RSpec.feature "Visitor navigates to home page", type: :feature, js: true do
   scenario "They see all products" do
     # ACT
     visit root_path
+    expect(page).to have_css('article.product', count: 3)
+    
+    find_link('Details', match: :first).click
+
 
     # DEBUG
+    sleep 1
     save_screenshot
-
+    
+    
     # VERIFY
-    expect(page).to have_css 'article.product', count: 10
+    expect(page).to have_css('article.product-detail', count: 1)
+    expect(page).to have_css('img.main-img')
+
   end
 end
