@@ -10,8 +10,8 @@ RSpec.feature "UserLogins", type: :feature, js: true do
     visit root_path
     find_link('Login').click
 
-    fill_in 'email', with: 'test@gmail.com'
-    fill_in 'password', with: 'abc123'
+    fill_in 'email', with: @user.email
+    fill_in 'password', with: @user.password
 
     page.find('input.btn').click
 
