@@ -15,8 +15,6 @@ class OrdersController < ApplicationController
     order  = create_order(charge)
     send_email = UserMailer.welcome_email(order).deliver_now
 
-    
-
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
@@ -65,8 +63,6 @@ class OrdersController < ApplicationController
     sale = Sale.active.any?
 
     enhanced_cart.each do |entry|
-      puts entry.inspect
-      puts entry[:product].inspect
       product = entry[:product]
       quantity = entry[:quantity]
       price = sale ? (product.price / (sale[0].percent_off * 0.1)) : product.price

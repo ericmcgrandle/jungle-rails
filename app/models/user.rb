@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  has_many :reviews
+
   before_validation :strip_whitespace
   before_save :downcase
 
