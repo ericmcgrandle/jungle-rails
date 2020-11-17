@@ -31,26 +31,26 @@
           <br><br>
         </dl>
 
-        
+        <% if @user %>
           <%= form_for :products, url: "/products/#{@product.id}/reviews" do |f| %>
-
-          <div class="form-group">
-            <%= label_tag "Description" %>
-            <%= f.text_field :description, class: "form-control" %>
-          </div>
-          <div class="form-group">
-            <%= label_tag "Rating" %>
-            <%= f.select :rating, [1, 2, 3, 4, 5], class: "form-control" %>
-          </div>
+            <div class="form-group">
+              <%= label_tag "Description" %>
+              <%= f.text_field :description, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= label_tag "Rating" %>
+              <%= f.select :rating, [1, 2, 3, 4, 5], class: "form-control" %>
+            </div>
             <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
           <% end %>
+        <% end %>
         
 
 
 
 
 
-        <% @review.map { |review| %>
+        <% @review.reverse.map { |review| %>
           <% user = getUser(review.user_id) %>
 
           <dl class="dl-horizontal">

@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find params[:id]
     @review = Review.where(product_id: params[:id])
+    @user = session[:user_id]
   end
 
 end
