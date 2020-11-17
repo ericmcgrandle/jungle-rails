@@ -1,0 +1,12 @@
+<h1>Order #<%= @order.id %></h1>
+   
+<h4>You order includes: </h4>
+<% @products.each do |item| %>
+  <p><%= item[:product].name %></p> 
+<% end %>
+
+<p> Your total : <%= humanized_money_with_symbol @order.total_cents / 100 %> </p>
+          
+<h4>Thank you for your order!</h4>
+    
+  

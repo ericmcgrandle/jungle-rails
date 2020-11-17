@@ -13,6 +13,9 @@ class OrdersController < ApplicationController
   def create
     charge = perform_stripe_charge
     order  = create_order(charge)
+    send_email = UserMailer.welcome_email(order).deliver_now
+
+    
 
     if order.valid?
       empty_cart!
@@ -26,6 +29,8 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  
 
   def price(old_price)
     if Sale.active.any?
@@ -60,9 +65,12 @@ class OrdersController < ApplicationController
     sale = Sale.active.any?
 
     enhanced_cart.each do |entry|
+      puts entry.inspect
+      puts entry[:product].inspect
       product = entry[:product]
       quantity = entry[:quantity]
       price = sale ? (product.price / (sale[0].percent_off * 0.1)) : product.price
+
       order.line_items.new(
         product: product,
         quantity: quantity,

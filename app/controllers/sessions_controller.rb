@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_lower_email(params[:email])
+    
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to '/'
@@ -16,5 +17,4 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to '/login'
   end
-  
 end
