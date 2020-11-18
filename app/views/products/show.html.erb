@@ -33,7 +33,6 @@
     </div>
 
 
-
     <% if @user %>
 
       <div class="review">
@@ -57,8 +56,6 @@
 
     <% end %>
 
-    
-        
     <% @review.reverse.map { |review| %>
       <% user = getUser(review.user_id) %>
 
