@@ -28,45 +28,54 @@
               <%= fa_icon "shopping-cart", text: 'Add' %>
             <% end %>
           </dt>
-          <br><br>
         </dl>
-
-        <% if @user %>
-          <%= form_for :products, url: "/products/#{@product.id}/reviews" do |f| %>
-            <div class="form-group">
-              <%= label_tag "Description" %>
-              <%= f.text_field :description, class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= label_tag "Rating" %>
-              <%= f.select :rating, [1, 2, 3, 4, 5], class: "form-control" %>
-            </div>
-            <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
-          <% end %>
-        <% end %>
-        
-
-
-
-
-
-        <% @review.reverse.map { |review| %>
-          <% user = getUser(review.user_id) %>
-
-          <dl class="dl-horizontal">
-            <dd><h4><%= "#{user.first_name} #{user.last_name}" %></h4></dd>
-            <dt>Stars</dt>
-            <dd><%= review.rating %></dd>
-            <dt>Review</dt>
-            <dd><%= review.description %></dd>
-          </dl>
-        <% } %>
-
-
-
       </div>
     </div>
 
-  </article>
 
+
+    <% if @user %>
+
+      <div class="review">
+        <h2 class="text-center"> Leave a Review </h2>
+
+        <%= form_for :products, url: "/products/#{@product.id}/reviews" do |f| %>
+          <div class="form-group text-center">
+            <%= label_tag "Description" %>
+            <%= f.text_field :description, class: "form-control" %>
+          </div>
+
+          <div class="form-group text-center">
+            <%= label_tag "Rating" %>
+            <%= f.select :rating, [1, 2, 3, 4, 5], class: "form-control" %> / 5
+          </div>
+
+          <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
+        <% end %>
+
+      </div>
+
+    <% end %>
+
+    
+        
+    <% @review.reverse.map { |review| %>
+      <% user = getUser(review.user_id) %>
+
+      <div class="reviews">
+        <dl class="text-center">
+          <dd><h4> <%= "#{user.first_name} #{user.last_name}" %> </h4></dd>
+          <dt>Stars</dt>
+          <dd><%= review.rating %></dd>
+          <dt>Review</dt>
+          <dd><%= review.description %></dd>
+        </dl>
+        <% if @user == user[:id] %>
+          <%= link_to fa_icon('trash'), "/products/#{review[:product_id]}/reviews/#{review[:id]}", class: 'btn btn-sm btn-danger align-right', method: :delete, data: { confirm: "Are you sure?" } %>
+        <% end %>
+      </div>
+      
+    <% } %>
+
+  </article>
 </section>
